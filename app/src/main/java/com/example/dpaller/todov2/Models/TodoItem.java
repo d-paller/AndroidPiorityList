@@ -1,9 +1,13 @@
 package com.example.dpaller.todov2.Models;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 /**
  * Created by dpall on 11/15/2017.
  */
 
+@Entity
 public class TodoItem {
     public String get_title() {
         return _title;
@@ -45,6 +49,16 @@ public class TodoItem {
         this._isDone = _isDone;
     }
 
+    public int get_itemId() {
+        return _itemId;
+    }
+
+    public void set_itemId(int _itemId) {
+        this._itemId = _itemId;
+    }
+
+    @PrimaryKey(autoGenerate = true)
+    private int _itemId;
     private String _title;
     private String _tag;
     private Integer _priority;
