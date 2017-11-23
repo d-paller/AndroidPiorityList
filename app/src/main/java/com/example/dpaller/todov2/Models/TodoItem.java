@@ -1,6 +1,7 @@
 package com.example.dpaller.todov2.Models;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
@@ -65,10 +66,19 @@ public class TodoItem {
     private String _description;
     private Boolean _isDone;
 
+    @Ignore
     public TodoItem(String title, String tag, int priority, String description){
         _title = title;
         _tag = tag;
         _priority = priority;
         _description = description;
+    }
+
+    public TodoItem(String title, String tag, int priority, String description, Boolean isDone){
+        _title = title;
+        _tag = tag;
+        _priority = priority;
+        _description = description;
+        _isDone = isDone;
     }
 }

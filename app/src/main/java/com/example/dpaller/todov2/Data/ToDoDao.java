@@ -22,10 +22,17 @@ public interface ToDoDao {
     @Query("select * from TodoItem where _priority = :priority and _isDone != 1")
     List<TodoItem> getAllOfPriority(int priority);
 
+    @Query("select * from TodoItem " +
+            " where _priority = (select min(_priority) from TodoItem)" +
+            " and _isDone = 0")
+    List<TodoItem> getAllHighestPriority();
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateItem(TodoItem item);
 
     @Query("update TodoItem set _isDone = 1 where _itemId = :itemId")
     void markAsDone(int itemId);
 
+    @Query("delete from TodoItem")
+    void clearDB();
 }

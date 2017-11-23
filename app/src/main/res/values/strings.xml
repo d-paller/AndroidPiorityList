@@ -4,4 +4,7 @@
     <string name="edit">Edit</string>
     <string name="tag">Tag:</string>
     <string name="priority">Priority:</string>
+    <string name="show_all">Show All</string>
+    <string name="show_priority">Priority</string>
+    <string name="descriptionTitle">Description</string>
 </resources>

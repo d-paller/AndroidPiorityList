@@ -9,11 +9,22 @@
         android:layout_height="match_parent"
         tools:context="com.example.dpaller.todov2.Views.HomeActivity">
 
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@layout/bottom_nav_items"
+            android:background="@color/cardview_light_background"
+            android:layout_gravity="bottom" >
+
+        </android.support.design.widget.BottomNavigationView>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/RecView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
 
         </android.support.v7.widget.RecyclerView>
 
@@ -25,9 +36,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            app:layout_anchor="@id/RecView"
+            android:onClick="AddNewItem"
             app:layout_anchorGravity="bottom|right|end"
-            android:onClick="AddNewItem"/>
+            app:layout_anchor="@id/RecView"/>
+
+
 
     </android.support.design.widget.CoordinatorLayout>
 

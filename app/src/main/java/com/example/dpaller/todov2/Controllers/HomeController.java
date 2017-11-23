@@ -31,12 +31,20 @@ public class HomeController {
         return db.toDoDao().getAllOfPriority(priority);
     }
 
+    public List<TodoItem> getAllHighestPriority(){
+        return db.toDoDao().getAllHighestPriority();
+    }
+
     public void updateItem(TodoItem item){
         db.toDoDao().updateItem(item);
     }
 
     public void markAsDone(int itemId){
         db.toDoDao().markAsDone(itemId);
+    }
+
+    public void clearDatabase () {
+        db.toDoDao().clearDB();
     }
 
 }

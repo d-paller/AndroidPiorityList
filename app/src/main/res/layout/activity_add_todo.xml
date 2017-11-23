@@ -1,41 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/add_content"
+<android.support.design.widget.CoordinatorLayout android:id="@+id/add_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context="com.example.dpaller.todov2.Views.ItemActivity"
+   >
 
     <LinearLayout
+        android:id="@+id/addItemLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:gravity="top"
+        >
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"/>
 
         <EditText
             android:id="@+id/addName"
-            android:layout_width="350dp"
-            android:layout_height="39dp"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Name"
-            />
 
+            android:inputType="text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Priority"/>
         <EditText
             android:id="@+id/addPriority"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
-            android:ems="10"
+
             android:inputType="number"
-            android:text="Priority"
             />
 
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"/>
         <EditText
             android:id="@+id/addNotes"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:ems="10"
+            android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:text="Notes"
             />
 
     </LinearLayout>
@@ -49,8 +72,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        app:layout_anchor="@id/add_content"
-        app:layout_anchorGravity="bottom|right|end"/>
+        app:layout_anchor="@id/addNotes"
+        app:layout_anchorGravity="bottom|right|end"
+        android:onClick="AddItemToDatabaseAndRedirect"
+        />
 
 
 </android.support.design.widget.CoordinatorLayout>
