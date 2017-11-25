@@ -1,6 +1,7 @@
 package com.example.dpaller.todov2.Views;
 
 import android.app.Activity;
+import android.arch.persistence.room.Update;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.example.dpaller.todov2.Controllers.HomeController;
 import com.example.dpaller.todov2.Models.TodoItem;
@@ -30,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     private HomeController controller;
     private Context _context;
     RecyclerView rvTodos;
+    Integer lastItemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,25 +48,11 @@ public class HomeActivity extends AppCompatActivity {
         // set recycler view
         rvTodos = (RecyclerView) findViewById(R.id.RecView);
 
-        try {
-            list = new AsyncTask<Void, Void, List<TodoItem>>(){
-
-                @Override
-                protected List<TodoItem> doInBackground(Void... voids) {
-                    return controller.getAllItems();
-                }
-            }.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                handleClick(item);
+                getCorrectItems(item.getItemId());
 
                 // Create adapter passing in the sample user data
                 adapter = new TodoAdapter(_context, list);
@@ -74,6 +63,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        lastItemId = R.id.show_all;
+        getCorrectItems(lastItemId);
+        UpdateView(list);
+
+    }
+
+    public void UpdateView(List<TodoItem> list){
 
         // Create adapter passing in the sample user data
         adapter = new TodoAdapter(_context, list);
@@ -82,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
         rvTodos.setAdapter(adapter);
 
         // Set layout manager to position the items
-        LinearLayoutManager llm = new LinearLayoutManager(this);
+        LinearLayoutManager llm = new LinearLayoutManager(_context);
         rvTodos.setLayoutManager(llm);
     }
 
@@ -92,13 +88,26 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void MarkAsComplete(View view) {
-        
+
+            new AsyncTask<Void, Void, Integer>() {
+
+                @Override
+                protected Integer doInBackground(Void... voids) {
+                    TextView tv = findViewById(R.id.title);
+                    controller.markAsDone(Integer.parseInt(tv.getTag().toString()));
+                    return 1;
+                }
+            }.execute();
+
+            getCorrectItems(lastItemId);
+            UpdateView(list);
     }
 
-    private void handleClick(MenuItem item){
-        switch(item.getItemId()){
+    private void getCorrectItems(Integer itemId){
+        switch(itemId){
 
             case R.id.show_priority:
+                lastItemId = itemId;
                 try {
                     list = new AsyncTask<Void, Void, List<TodoItem>>(){
 
@@ -115,6 +124,7 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case R.id.show_all:
+                lastItemId = itemId;
                 try {
                     list = new AsyncTask<Void, Void, List<TodoItem>>(){
 
@@ -130,21 +140,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 break;
 
-            default:
-                try {
-                    list = new AsyncTask<Void, Void, List<TodoItem>>(){
-
-                        @Override
-                        protected List<TodoItem> doInBackground(Void... voids) {
-                            return controller.getAllHighestPriority();
-                        }
-                    }.execute().get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-                break;
 
         }
     }

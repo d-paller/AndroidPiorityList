@@ -50,16 +50,16 @@ public class TodoItem {
         this._isDone = _isDone;
     }
 
-    public int get_itemId() {
+    public Integer get_itemId() {
         return _itemId;
     }
 
-    public void set_itemId(int _itemId) {
+    public void set_itemId(Integer _itemId) {
         this._itemId = _itemId;
     }
 
     @PrimaryKey(autoGenerate = true)
-    private int _itemId;
+    private Integer _itemId;
     private String _title;
     private String _tag;
     private Integer _priority;

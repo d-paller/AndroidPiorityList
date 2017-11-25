@@ -31,7 +31,7 @@ public interface ToDoDao {
     void updateItem(TodoItem item);
 
     @Query("update TodoItem set _isDone = 1 where _itemId = :itemId")
-    void markAsDone(int itemId);
+    void markAsDone(Integer itemId);
 
     @Query("delete from TodoItem")
     void clearDB();

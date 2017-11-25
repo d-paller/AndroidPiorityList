@@ -76,6 +76,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
         // Set item views based on your views and data model
         TextView titleTV = viewHolder.titleTV;
         titleTV.setText(todoItem.get_title());
+        titleTV.setTag(todoItem.get_itemId());
 
         TextView descriptionTV = viewHolder.descriptionTV;
         descriptionTV.setText(todoItem.get_description());

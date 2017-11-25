@@ -7,7 +7,7 @@ import android.content.Context;
 
 import com.example.dpaller.todov2.Models.TodoItem;
 
-@Database(entities = {TodoItem.class}, version = 1, exportSchema = false)
+@Database(entities = {TodoItem.class}, version = 2, exportSchema = false)
 public abstract class AppDB extends RoomDatabase {
     private static AppDB INSTANCE;
 
