@@ -67,14 +67,14 @@ public class TodoItem {
     private Boolean _isDone;
 
     @Ignore
-    public TodoItem(String title, String tag, int priority, String description){
+    public TodoItem(String title, String tag, Integer priority, String description){
         _title = title;
         _tag = tag;
         _priority = priority;
         _description = description;
     }
 
-    public TodoItem(String title, String tag, int priority, String description, Boolean isDone){
+    public TodoItem(String title, String tag, Integer priority, String description, Boolean isDone){
         _title = title;
         _tag = tag;
         _priority = priority;

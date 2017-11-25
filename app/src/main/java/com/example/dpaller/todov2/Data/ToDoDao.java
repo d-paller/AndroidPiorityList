@@ -16,15 +16,15 @@ public interface ToDoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addItem(TodoItem item);
 
-    @Query("select * from todoitem")
+    @Query("select * from todoitem where _isDone != 1")
     List<TodoItem> getAllItems();
 
     @Query("select * from TodoItem where _priority = :priority and _isDone != 1")
     List<TodoItem> getAllOfPriority(int priority);
 
     @Query("select * from TodoItem " +
-            " where _priority = (select min(_priority) from TodoItem)" +
-            " and _isDone = 0")
+            " where _priority = (select min(_priority) from TodoItem where _isDone != 1)" +
+            " and _isDone != 1")
     List<TodoItem> getAllHighestPriority();
 
     @Update(onConflict = OnConflictStrategy.REPLACE)

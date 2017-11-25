@@ -85,7 +85,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
         tagTV.setText(todoItem.get_tag());
 
         TextView priorityTV = viewHolder.priorityTV;
-        //priorityTV.setText(todoItem.get_priority());
+        priorityTV.setText(todoItem.get_priority().toString());
 
 
         Button editButton = viewHolder.editBtn;
